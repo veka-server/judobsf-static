@@ -1,9 +1,9 @@
 FROM alpine:latest
 
-RUN apk update && apk upgrade --no-cache
-RUN apk add --no-cache \
+RUN apk update && apk upgrade --no-cache && \
+    apk add --no-cache \
     nginx \
-    supervisor \
+    supervisor
 
 RUN mkdir -p /run/nginx /var/www/html /var/log/supervisor
 
@@ -26,8 +26,24 @@ server {
     access_log /var/log/nginx/access.log;
     error_log /var/log/nginx/error.log;
 
-    location ~ /\.ht {
+    # Page principale
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+
+    # Sécurité - deny access to hidden files
+    location ~ /\. {
         deny all;
+        access_log off;
+        log_not_found off;
+    }
+    
+    # Sécurité - deny access to backup files
+    location ~ ~$ {
+        deny all;
+        access_log off;
+        log_not_found off;
     }
 }
 EOF
