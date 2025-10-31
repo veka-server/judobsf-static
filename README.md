@@ -6,7 +6,13 @@
 ![Status](https://img.shields.io/badge/Status-Actif-green?style=for-the-badge)
 ![Tech](https://img.shields.io/badge/Tech-HTML--CSS--JS-blue?style=for-the-badge)
 
----
+![Docker Pulls](https://img.shields.io/github/v/release/veka-server/judobsf-static?label=GHCR)
+
+![Build Docker](https://github.com/veka-server/judobsf-static/actions/workflows/build-central.yml/badge.svg)
+
+```bash
+$ docker pull ghcr.io/veka-server/judobsf-static:latest
+```
 
 ## 📋 À Propos du Projet
 
