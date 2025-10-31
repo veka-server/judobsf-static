@@ -1,0 +1,790 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JUDO BSF - Briouze & Ségrie-Fontaine</title>
+    <style>
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #c53030;
+            --accent-color: #f7fafc;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --white: #ffffff;
+            --gradient: linear-gradient(135deg, #1a365d 0%, #c53030 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--secondary-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient);
+            color: var(--white);
+            padding: 150px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('imgs/hero_dojo_aerial.webp') center/cover;
+            opacity: 0.2;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: var(--white);
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(197, 48, 48, 0.3);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(197, 48, 48, 0.4);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: var(--secondary-color);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* À Propos */
+        .about {
+            background: var(--accent-color);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-text h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Sites */
+        .sites {
+            background: var(--white);
+        }
+
+        .sites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .site-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .site-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .site-card h3 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .site-card .location {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .schedule-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .schedule-item:last-child {
+            border-bottom: none;
+        }
+
+        .schedule-day {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .schedule-time {
+            color: var(--text-light);
+        }
+
+        .map-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1rem;
+            padding: 10px 15px;
+            background: var(--secondary-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .map-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(197, 48, 48, 0.3);
+        }
+
+        .contact-direct {
+            background: var(--accent-color);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .contact-direct h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-direct p {
+            color: var(--text-light);
+            margin-bottom: 0.3rem;
+        }
+
+        .recruitment-banner {
+            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .recruitment-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/><circle cx="20" cy="20" r="1" fill="white" opacity="0.1"/><circle cx="80" cy="30" r="1.5" fill="white" opacity="0.1"/><circle cx="30" cy="70" r="1" fill="white" opacity="0.1"/><circle cx="70" cy="80" r="2" fill="white" opacity="0.1"/></svg>');
+            z-index: 1;
+        }
+
+        .recruitment-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .recruitment-banner h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .recruitment-banner p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--white);
+            color: var(--text-dark);
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .github-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .github-icon {
+            width: 20px;
+            height: 20px;
+            fill: var(--text-dark);
+        }
+
+        .warning-notice {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .facebook-highlight {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+        }
+
+        .facebook-highlight h4 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .facebook-btn-large {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: #1877f2;
+            color: var(--white);
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(24, 119, 242, 0.3);
+        }
+
+        .facebook-btn-large:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(24, 119, 242, 0.4);
+        }
+
+        .facebook-icon {
+            width: 24px;
+            height: 24px;
+            fill: var(--white);
+        }
+
+        /* Contact */
+        .contact {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-item i {
+            margin-right: 1rem;
+            color: var(--secondary-color);
+            width: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--secondary-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(197, 48, 48, 0.3);
+        }
+
+        .contact-image {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .contact-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+                padding: 1rem 0;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .sites-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<header>
+    <div class="container">
+        <nav class="nav-container">
+            <a href="#home" class="logo">JUDO <span>BSF</span></a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home">Accueil</a></li>
+                <li><a href="#about">À Propos</a></li>
+                <li><a href="#sites">Nos Sites</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        </nav>
+    </div>
+</header>
+
+<!-- Hero Section -->
+<section id="home" class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1>JUDO BSF</h1>
+            <p class="subtitle">Club de Judo de Briouze & Ségrie-Fontaine</p>
+            <a href="#about" class="cta-btn">Découvrir notre club</a>
+        </div>
+    </div>
+</section>
+
+<!-- À Propos -->
+<section id="about" class="about">
+    <div class="container">
+        <h2 class="section-title fade-in">À Propos de Notre Club</h2>
+        <div class="about-content">
+            <div class="about-text fade-in">
+                <h3>Un club dynamique dans l'Orne</h3>
+                <p>Le <strong>JUDO BSF</strong> est un groupement de clubs de judo basé dans l'Orne (61), dynamiques et engagés dans la formation et la compétition. Nous dispensions des cours sur deux sites : Briouze et Ségrie-Fontaine.</p>
+
+                <h3>Formation pour tous</h3>
+                <p>Notre club propose des cours adaptés à tous les âges :</p>
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li>Enfants (débutants et confirmés)</li>
+                    <li>Adolescents</li>
+                    <li>Adultes</li>
+                </ul>
+
+                <p>Nos activités couvrent l'apprentissage technique, la préparation physique, l'esprit de compétition et les valeurs du judo traditionnel.</p>
+            </div>
+            <div class="about-image fade-in">
+                <img src="imgs/children_training_new.webp" alt="Entraînement enfants judo">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Nos Sites -->
+<section id="sites" class="sites">
+    <div class="container">
+        <h2 class="section-title">Nos Sites d'Entraînement</h2>
+        <div class="warning-notice fade-in">
+            ⚠️ <strong>Important :</strong> Les horaires affichés ci-dessous peuvent être périmés. Contactez directement les responsables pour connaître les horaires actuels.
+        </div>
+        <div class="sites-grid">
+            <div class="site-card fade-in">
+                <h3>Site de Briouze</h3>
+                <p class="location">📍 Salle omnisports, place Salzdahlm, 61220 Briouze</p>
+                <div class="schedule-item">
+                    <span class="schedule-day">Lundi</span>
+                    <span class="schedule-time">17h30 - Enfants</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-day">Vendredi</span>
+                    <span class="schedule-time">19h30 - Ados & Adultes</span>
+                </div>
+                <div class="contact-direct">
+                    <h4>Contacts Briouze</h4>
+                    <p><strong>Président :</strong> Frédéric Durand</p>
+                    <p><strong>Trésorière :</strong> Sonia Robbe (02 50 75 00 40)</p>
+                    <p><strong>Membres :</strong> Valérie Durand, Virginie Davy (02 33 64 86 06)</p>
+                </div>
+                <a href="https://maps.google.com/?q=SALLE+OMNISPORTS+PLACE+SALZDAHLM+61220+BRIOUZE" target="_blank" class="map-link">📍 Voir sur carte</a>
+            </div>
+
+            <div class="site-card fade-in">
+                <h3>Site de Ségrie-Fontaine</h3>
+                <p class="location">📍 1 Le Bourg, 61100 Athis-Val de Rouvre</p>
+                <div class="schedule-item">
+                    <span class="schedule-day">Mardi</span>
+                    <span class="schedule-time">Tous publics</span>
+                </div>
+                <div class="contact-direct">
+                    <h4>Contacts Ségrie-Fontaine</h4>
+                    <p><strong>Président :</strong> Jean-Louis Lengliné <span style="font-size:0.9rem;">(02 33 66 30 32)</span></p>
+                    <p><strong>Secrétaire :</strong> Michel Ménardon <span style="font-size:0.9rem;">(02 33 66 26 31 / 06 10 87 22 96)</span></p>
+                    <p><strong>Membre :</strong> Sabrina Bourdon</p>
+                </div>
+                <a href="https://maps.google.com/?q=1+Le+Bourg+61100+Athis-Val+de+Rouvre" target="_blank" class="map-link">📍 Voir sur carte</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Bandeau Recrutement -->
+<section class="recruitment-banner">
+    <div class="container">
+        <div class="recruitment-content fade-in">
+            <h3>🤝 Recherche : Bénévole Développeur Web</h3>
+            <p>Le site internet du club JUDO BSF recherche actuellement un bénévole compétent en développement web pour assurer sa maintenance et son évolution.</p>
+            <a href="https://github.com/veka-server/judobsf-static" target="_blank" class="github-link">
+                <svg class="github-icon" viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                Voir le code sur GitHub
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="contact">
+    <div class="container">
+        <h2 class="section-title" style="color: white;">Contactez-nous</h2>
+
+        <div class="facebook-highlight fade-in">
+            <h4>Suivez-nous sur Facebook !</h4>
+            <p style="margin-bottom: 1.5rem; color: var(--text-light);">Restez informés des dernières actualités, événements et informations du club</p>
+            <a href="https://www.facebook.com/judoBSF61/" target="_blank" class="facebook-btn-large">
+                <svg class="facebook-icon" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+                Visitez notre page Facebook
+            </a>
+        </div>
+
+        <div class="contact-content">
+            <div class="contact-info fade-in">
+                <h3>Autres moyens de contact</h3>
+                <p style="font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.9;">Pour plus d'informations sur nos cours, les horaires ou pour vous inscrire, n'hésitez pas à nous contacter !</p>
+
+                <div class="social-links">
+                    <a href="https://www.facebook.com/judoBSF61/" class="map-link" title="Facebook" target="_blank">Page Facebook</a>
+                    <a href="https://www.ffjudo.com/club-olympique-club-briouzain" class="map-link" title="FFJudo briouze" target="_blank">FFJudo Briouze</a>
+                    <a href="https://www.ffjudo.com/club-foyer-laic-segrie-f" class="map-link" title="FFJudo segrie" target="_blank">FFJudo Ségrie Fontaine</a>
+                </div>
+            </div>
+
+            <div class="contact-image fade-in">
+                <img src="imgs/modern_dojo_interior.webp" alt="Dojo de judo">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <p>&copy; 2025 JUDO BSF - Briouze & Ségrie-Fontaine. Tous droits réservés.</p>
+    </div>
+</footer>
+
+<script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navMenu = document.getElementById('navMenu');
+
+    mobileMenuBtn.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                // Close mobile menu if open
+                navMenu.classList.remove('active');
+            }
+        });
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('header');
+        if (window.scrollY > 100) {
+            header.style.background = 'rgba(255, 255, 255, 0.95)';
+            header.style.backdropFilter = 'blur(10px)';
+        } else {
+            header.style.background = '#ffffff';
+            header.style.backdropFilter = 'none';
+        }
+    });
+
+    // Fade in animation on scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        observer.observe(el);
+    });
+</script>
+</body>
+</html>
